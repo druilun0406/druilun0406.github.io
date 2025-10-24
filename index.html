@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carpintería SierraLuna — Granada</title>
+    <meta name="description" content="Carpintería SierraLuna en Granada: muebles a medida, restauración y reformas de madera. Calidad artesanal y diseño local." />
+    <style>
+        :root{--accent:#8b5a2b;--dark:#222;--muted:#666}
+        *{box-sizing:border-box}
+        body{font-family:Inter, system-ui, Arial, sans-serif;line-height:1.5;color:var(--dark);margin:0}
+        header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
+        .container{max-width:1100px;margin:0 auto;padding:0 20px}
+        .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+        .brand{display:flex;align-items:center;gap:12px}
+        .logo{width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,#c69b6d,#8b5a2b);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+        nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+        nav a{color:var(--dark);text-decoration:none;font-weight:600}
+        .cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+
+        /* Hero */
+        .hero{display:flex;align-items:center;color:#fff;min-height:56vh;background-size:cover;background-position:center;}
+        .hero-inner{background:linear-gradient(90deg, rgba(0,0,0,0.55), rgba(0,0,0,0.2));width:100%;padding:48px 20px}
+        .hero h1{margin:0 0 8px;font-size:2.1rem}
+        .hero p{margin:0 0 18px;color:#f0e9e0}
+        .hero .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+        /* Content */
+        main{padding:44px 0}
+        .grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
+        .card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 6px 18px rgba(18,18,18,0.06)}
+        h2{margin-top:0}
+
+        /* FAQ */
+        .faq .q{border-top:1px solid #eee;padding:14px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq .a{padding:12px 0;color:var(--muted);display:none}
+
+        footer{Padding:28px 0;color:var(--muted);border-top:1px solid #eee}
+
+        /* Responsive */
+        @media (max-width:900px){.grid{grid-template-columns:1fr}nav ul{display:none}.nav{gap:10px}.hero h1{font-size:1.6rem}}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav">
+            <div class="brand">
+                <div class="logo">CS</div>
+                <div>
+                    <div style="font-weight:800">Carpintería SierraLuna</div>
+                    <div style="font-size:12px;color:var(--muted)">Granada, España</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div>
+                <a class="cta" href="#contacto">Solicitar presupuesto</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero" style="background-image:url('https://images.unsplash.com/photo-1520975912845-3d6c3a5b1f6b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f8c3b6a6a4b4b2f2a1e3b5d0b9c9f1e');">
+        <div class="container hero-inner">
+            <h1>Carpintería artesanal en Granada</h1>
+            <p>Diseñamos y fabricamos muebles a medida, restauramos piezas con historia y ejecutamos reformas de carpintería con materiales sostenibles.</p>
+            <div class="hero-actions">
+                <a class="cta" href="#contacto">Solicita presupuesto</a>
+                <a style="background:transparent;border:1px solid rgba(255,255,255,0.35);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700" href="#proyectos">Ver proyectos</a>
+            </div>
+            <div style="margin-top:18px;font-size:14px;opacity:0.95">📍 Plaza Nueva, Granada · Tel: <a href="tel:+34958000000" style="color:#fff;text-decoration:underline">+34 958 00 00 00</a></div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="grid">
+            <div>
+                <section id="servicios" class="card">
+                    <h2>Qué hacemos</h2>
+                    <p>En Carpintería SierraLuna combinamos técnicas tradicionales con maquinaria moderna para ofrecer soluciones de carpintería a medida. Trabajamos con maderas locales y acabados ecológicos.</p>
+                    <ul>
+                        <li><strong>Muebles a medida:</strong> cocina, armarios, mesas y muebles de salón.</li>
+                        <li><strong>Restauración:</strong> recuperación de puertas, ventanas y piezas antiguas.</li>
+                        <li><strong>Instalaciones:</strong> tarimas, revestimientos y carpintería exterior.</li>
+                        <li><strong>Diseño y consultoría:</strong> planos, visualizaciones y asesoría de materiales.</li>
+                    </ul>
+                </section>
+
+                <section id="proyectos" class="card" style="margin-top:20px">
+                    <h2>Proyectos destacados</h2>
+                    <p>Hemos ejecutado proyectos en viviendas y comercios por toda Granada: desde restauraciones en el Albaicín hasta mobiliario para empresas locales.</p>
+                    <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+                        <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=3f6f4b0a1b2c6d7e8f9a0b1c2d3e4f5a" alt="Proyecto 1" style="width:160px;height:110px;object-fit:cover;border-radius:8px">
+                        <img src="https://images.unsplash.com/photo-1556228720-7c8cdbf0e81f?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d" alt="Proyecto 2" style="width:160px;height:110px;object-fit:cover;border-radius:8px">
+                    </div>
+                </section>
+
+                <section id="faq" class="card faq" style="margin-top:20px">
+                    <h2>Preguntas frecuentes</h2>
+                    <div class="q">¿Hacen muebles a medida? <span>+</span></div>
+                    <div class="a">Sí, diseñamos y fabricamos muebles totalmente a medida. Empezamos con una consulta y planos para ajustar presupuesto y plazos.</div>
+                    <div class="q">¿Trabajan con maderas autóctonas? <span>+</span></div>
+                    <div class="a">Preferimos maderas locales y sostenibles como pino, roble y castaño; también trabajamos con maderas importadas bajo petición.</div>
+                    <div class="q">¿Cuánto tardan los proyectos? <span>+</span></div>
+                    <div class="a">Pequeños trabajos pueden tardar 1-2 semanas; proyectos de cocina o reformas pueden tardar 4-8 semanas según complejidad.</div>
+                </section>
+            </div>
+
+            <aside>
+                <div class="card">
+                    <h3>Contacto</h3>
+                    <p id="contacto">Carpintería SierraLuna<br>Plaza Nueva, 3 — Granada<br>Tel: <a href="tel:+34958000000">+34 958 00 00 00</a><br>Email: <a href="mailto:info@sierraluna-carpinteria.es">info@sierraluna-carpinteria.es</a></p>
+                    <a class="cta" href="mailto:info@sierraluna-carpinteria.es" style="display:inline-block;margin-top:10px">Pedir presupuesto</a>
+                </div>
+
+                <div class="card" style="margin-top:18px">
+                    <h3>Horario</h3>
+                    <p>Lun-Vie 8:30–18:00<br>Sábados solo con cita</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+                <div>© <strong>Carpintería SierraLuna</strong> — Granada</div>
+                <div style="color:var(--muted)">Hecho con cuidado y madera local.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ accordion
+        document.querySelectorAll('.faq .q').forEach(function(q){
+            q.addEventListener('click', function(){
+                var next = q.nextElementSibling;
+                if(!next) return;
+                var open = next.style.display === 'block';
+                // close all answers
+                document.querySelectorAll('.faq .a').forEach(function(a){a.style.display='none'});
+                // open selected
+                next.style.display = open ? 'none' : 'block';
+            })
+        })
+    </script>
+</body>
+</html>
