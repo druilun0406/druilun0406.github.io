@@ -6,65 +6,109 @@
     <title>Carpintería SierraLuna — Granada</title>
     <meta name="description" content="Carpintería SierraLuna en Granada: muebles a medida, restauración y reformas de madera. Calidad artesanal y diseño local." />
     <style>
-        :root{--accent:#8b5a2b;--dark:#222;--muted:#666}
+        :root{
+            --accent-1: #ff7a18;
+            --accent-2: #8b5a2b; /* madera */
+            --dark: #112;
+            --muted: #6b6b6b;
+            --glass: rgba(255,255,255,0.6);
+        }
         *{box-sizing:border-box}
-        body{font-family:Inter, system-ui, Arial, sans-serif;line-height:1.5;color:var(--dark);margin:0}
-        header{background:#fff;border-bottom:1px solid #eee;position:sticky;top:0;z-index:10}
-        .container{max-width:1100px;margin:0 auto;padding:0 20px}
-        .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
-        .brand{display:flex;align-items:center;gap:12px}
-        .logo{width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,#c69b6d,#8b5a2b);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
-        nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
-        nav a{color:var(--dark);text-decoration:none;font-weight:600}
-        .cta{background:var(--accent);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700}
+        body{font-family:Inter, system-ui, Arial, sans-serif;line-height:1.5;color:var(--dark);margin:0;background:#fbf9f6}
 
-        /* Hero */
-        .hero{display:flex;align-items:center;color:#fff;min-height:56vh;background-size:cover;background-position:center;}
-        .hero-inner{background:linear-gradient(90deg, rgba(0,0,0,0.55), rgba(0,0,0,0.2));width:100%;padding:48px 20px}
-        .hero h1{margin:0 0 8px;font-size:2.1rem}
-        .hero p{margin:0 0 18px;color:#f0e9e0}
-        .hero .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+        /* Header (glass + modern) */
+        header{
+            position:sticky;top:12px;z-index:20;padding:6px 0;
+        }
+        .nav-wrap{backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.4));box-shadow:0 8px 30px rgba(15,15,15,0.06);border-radius:14px}
+        .container{max-width:1100px;margin:0 auto;padding:0 20px}
+        .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 8px}
+        .brand{display:flex;align-items:center;gap:14px}
+        .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#c69b6d,#8b5a2b);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 6px 18px rgba(139,90,43,0.18)}
+        .brand .title{font-weight:800;letter-spacing:0.2px}
+        .brand .sub{font-size:12px;color:var(--muted)}
+
+        nav{margin-left:24px}
+        nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;align-items:center}
+        nav a{color:var(--dark);text-decoration:none;font-weight:600;position:relative;padding:6px 0}
+        nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));transition:width .28s}
+        nav a:hover::after, nav a.active::after{width:100%}
+
+        .actions{display:flex;gap:12px;align-items:center}
+        .btn-cta{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;color:#fff;font-weight:800;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 20px rgba(139,90,43,0.18);text-decoration:none;transform:translateY(0);transition:transform .16s, box-shadow .16s}
+        .btn-cta:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(139,90,43,0.2)}
+
+        /* subtle secondary button */
+        .btn-ghost{background:transparent;border:1px solid rgba(17,17,17,0.06);padding:8px 12px;border-radius:10px;color:var(--dark);font-weight:700;text-decoration:none}
+
+        /* Hero tweaks */
+        .hero{display:flex;align-items:center;color:#fff;min-height:58vh;background-size:cover;background-position:center;border-radius:16px;margin:18px 0}
+        .hero-inner{background:linear-gradient(90deg, rgba(0,0,0,0.60), rgba(0,0,0,0.28));width:100%;padding:64px 20px;border-radius:16px}
+        .hero h1{margin:0 0 8px;font-size:2.4rem}
+        .hero p{margin:0 0 18px;color:#f8efe7;font-size:1.05rem}
 
         /* Content */
-        main{padding:44px 0}
+        main{padding:20px 0 60px}
         .grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
-        .card{background:#fff;border-radius:10px;padding:20px;box-shadow:0 6px 18px rgba(18,18,18,0.06)}
+        .card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(18,18,18,0.04)}
         h2{margin-top:0}
 
         /* FAQ */
-        .faq .q{border-top:1px solid #eee;padding:14px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+        .faq .q{border-top:1px solid #f0f0f0;padding:14px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
         .faq .a{padding:12px 0;color:var(--muted);display:none}
 
-        footer{Padding:28px 0;color:var(--muted);border-top:1px solid #eee}
+        footer{padding:28px 0;color:var(--muted);border-top:1px solid #eee}
 
-        /* Responsive */
-        @media (max-width:900px){.grid{grid-template-columns:1fr}nav ul{display:none}.nav{gap:10px}.hero h1{font-size:1.6rem}}
+        /* Mobile */
+        .hamburger{display:none;border:0;background:transparent;padding:8px;border-radius:8px}
+        .hamburger .bar{width:22px;height:2px;background:var(--dark);display:block;margin:4px 0;border-radius:2px}
+        @media (max-width:900px){
+            .grid{grid-template-columns:1fr}
+            nav ul{display:none}
+            .hamburger{display:block}
+            .nav{gap:10px}
+            .hero h1{font-size:1.6rem}
+        }
+
+        /* Mobile menu visible state */
+        .nav-open nav ul{display:flex;flex-direction:column;gap:10px;padding:12px}
     </style>
 </head>
 <body>
-    <header>
-        <div class="container nav">
-            <div class="brand">
-                <div class="logo">CS</div>
-                <div>
-                    <div style="font-weight:800">Carpintería SierraLuna</div>
-                    <div style="font-size:12px;color:var(--muted)">Granada, España</div>
+        <header>
+            <div class="container nav-wrap">
+                <div class="container nav" id="topNav">
+                    <div class="brand">
+                        <div class="logo">CS</div>
+                        <div>
+                            <div class="title">Carpintería SierraLuna</div>
+                            <div class="sub">Granada, España</div>
+                        </div>
+                    </div>
+
+                    <button class="hamburger" id="menuToggle" aria-label="Abrir menú">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </button>
+
+                    <nav>
+                        <ul>
+                            <li><a href="#inicio" class="active">Inicio</a></li>
+                            <li><a href="#servicios">Servicios</a></li>
+                            <li><a href="#proyectos">Proyectos</a></li>
+                            <li><a href="#faq">FAQ</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </nav>
+
+                    <div class="actions">
+                        <a class="btn-ghost" href="#proyectos">Ver trabajos</a>
+                        <a class="btn-cta" href="#contacto">Solicitar presupuesto</a>
+                    </div>
                 </div>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#proyectos">Proyectos</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
-            <div>
-                <a class="cta" href="#contacto">Solicitar presupuesto</a>
-            </div>
-        </div>
-    </header>
+        </header>
 
     <section id="inicio" class="hero" style="background-image:url('https://images.unsplash.com/photo-1520975912845-3d6c3a5b1f6b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f8c3b6a6a4b4b2f2a1e3b5d0b9c9f1e');">
         <div class="container hero-inner">
@@ -136,19 +180,35 @@
         </div>
     </footer>
 
-    <script>
-        // Simple FAQ accordion
-        document.querySelectorAll('.faq .q').forEach(function(q){
-            q.addEventListener('click', function(){
-                var next = q.nextElementSibling;
-                if(!next) return;
-                var open = next.style.display === 'block';
-                // close all answers
-                document.querySelectorAll('.faq .a').forEach(function(a){a.style.display='none'});
-                // open selected
-                next.style.display = open ? 'none' : 'block';
+        <script>
+            // Mobile menu toggle
+            (function(){
+                var toggle = document.getElementById('menuToggle');
+                var topNav = document.getElementById('topNav');
+                toggle && toggle.addEventListener('click', function(){
+                    var root = document.querySelector('header');
+                    if(root.classList.contains('nav-open')){
+                        root.classList.remove('nav-open');
+                        toggle.setAttribute('aria-label','Abrir menú');
+                    } else {
+                        root.classList.add('nav-open');
+                        toggle.setAttribute('aria-label','Cerrar menú');
+                    }
+                });
+            })();
+
+            // Simple FAQ accordion
+            document.querySelectorAll('.faq .q').forEach(function(q){
+                q.addEventListener('click', function(){
+                    var next = q.nextElementSibling;
+                    if(!next) return;
+                    var open = next.style.display === 'block';
+                    // close all answers
+                    document.querySelectorAll('.faq .a').forEach(function(a){a.style.display='none'});
+                    // open selected
+                    next.style.display = open ? 'none' : 'block';
+                })
             })
-        })
-    </script>
+        </script>
 </body>
 </html>
