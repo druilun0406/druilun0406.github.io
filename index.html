@@ -28,15 +28,24 @@
             --dark: #2d231f;
             --muted: #6b665f;
             --glass: rgba(255,255,255,0.8);
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.1);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.15);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
             --anim: .4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        *{box-sizing:border-box}
-        body{
-            font-family:'DM Sans', system-ui, sans-serif;
-            line-height:1.5;
-            color:var(--dark);
-            margin:0;
-            background:var(--bg-warm);
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'DM Sans', system-ui, sans-serif;
+            line-height: 1.5;
+            color: var(--dark);
+            margin: 0;
+            background: var(--bg-warm);
             background-image: 
                 radial-gradient(circle at 100% 0%, rgba(212,163,115,0.05) 0%, transparent 50%),
                 radial-gradient(circle at 0% 100%, rgba(133,80,45,0.05) 0%, transparent 50%);
@@ -64,47 +73,70 @@
         .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 8px}
         .brand{display:flex;align-items:center;gap:14px}
         .logo{
-            width:64px;height:64px;
-            border-radius:16px;
+            width:70px;height:70px;
+            border-radius:20px;
             background:linear-gradient(135deg, var(--wood-light), var(--wood-dark));
-            display:flex;align-items:center;justify-content:center;
+            display:flex;
+            align-items:center;
+            justify-content:center;
             position:relative;
             color:#fff;
             font-weight:800;
-            font-size:20px;
+            font-size:24px;
             box-shadow:
-                0 6px 18px rgba(139,90,43,0.18),
-                inset 0 2px 4px rgba(255,255,255,0.2);
+                0 8px 24px rgba(139,90,43,0.2),
+                inset 0 2px 6px rgba(255,255,255,0.3);
             transition:all var(--anim);
             overflow:hidden;
         }
         .logo::before {
             content:'';
             position:absolute;
-            width:100%;
-            height:100%;
-            background-image: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="none"/><path d="M0 0L80 80M20 0L80 60M40 0L80 40M60 0L80 20M0 20L60 80M0 40L40 80M0 60L20 80" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
-            opacity:0.15;
+            inset:0;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.2) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M25 25L75 75M25 75L75 25" stroke="rgba(255,255,255,0.15)" stroke-width="2"/><circle cx="50" cy="50" r="20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            opacity:0.3;
+            transition:all 0.5s;
         }
         .logo::after {
             content:'';
             position:absolute;
-            width:40px;height:40px;
-            background-image: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 5L35 30H5L20 5Z" fill="rgba(255,255,255,0.2)"/></svg>');
-            opacity:0;
-            transform:translateY(40px);
+            inset:3px;
+            border-radius:17px;
+            background:linear-gradient(135deg, 
+                rgba(255,255,255,0.2), 
+                rgba(255,255,255,0.05) 40%,
+                rgba(255,255,255,0) 80%
+            );
+            opacity:0.5;
             transition:all 0.5s;
+        }
+        .logo span {
+            position:relative;
+            z-index:1;
+            background:linear-gradient(-45deg, #fff, #f0e9e0);
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+            font-family:'Playfair Display', serif;
+            letter-spacing:1px;
         }
         .logo:hover{
             transform:scale(1.05) rotate(-3deg);
             box-shadow:
-                0 8px 24px rgba(139,90,43,0.25),
-                inset 0 2px 6px rgba(255,255,255,0.3);
+                0 12px 32px rgba(139,90,43,0.3),
+                inset 0 2px 8px rgba(255,255,255,0.4);
+        }
+        .logo:hover::before {
+            transform:rotate(180deg);
+            opacity:0.5;
         }
         .logo:hover::after {
-            opacity:1;
-            transform:translateY(0) rotate(180deg);
+            opacity:0.8;
+            transform:scale(0.95);
         }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
         .brand .title{font-weight:800;letter-spacing:0.2px}
         .brand .sub{font-size:12px;color:var(--muted)}
 
@@ -262,6 +294,167 @@
             transform:translateY(-4px);
             box-shadow:0 20px 40px rgba(18,18,18,0.08);
         }
+
+        /* Projects Grid */
+        .projects-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+            gap:24px;
+            margin:32px 0;
+        }
+        .project-item {
+            position:relative;
+            border-radius:16px;
+            overflow:hidden;
+            aspect-ratio:4/3;
+            cursor:pointer;
+        }
+        .project-img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:transform .5s ease-out;
+        }
+        .project-overlay {
+            position:absolute;
+            inset:0;
+            background:linear-gradient(to top, 
+                rgba(45,35,31,0.95),
+                rgba(45,35,31,0.7) 50%,
+                rgba(45,35,31,0.3)
+            );
+            padding:24px;
+            color:#fff;
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-end;
+            opacity:0;
+            transition:all .3s ease-out;
+        }
+        .project-overlay h3 {
+            font-size:1.4rem;
+            margin:0 0 8px;
+            transform:translateY(20px);
+            transition:transform .3s ease-out;
+        }
+        .project-overlay p {
+            margin:0 0 16px;
+            transform:translateY(20px);
+            transition:transform .3s ease-out .05s;
+        }
+        .project-tag {
+            display:inline-block;
+            padding:6px 12px;
+            background:rgba(255,255,255,0.2);
+            border-radius:100px;
+            font-size:0.9rem;
+            transform:translateY(20px);
+            transition:transform .3s ease-out .1s;
+        }
+        .project-item:hover .project-img {
+            transform:scale(1.1);
+        }
+        .project-item:hover .project-overlay {
+            opacity:1;
+        }
+        .project-item:hover .project-overlay h3,
+        .project-item:hover .project-overlay p,
+        .project-item:hover .project-overlay .project-tag {
+            transform:translateY(0);
+        }
+
+        /* Gallery Navigation */
+        .gallery-nav {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:24px;
+            margin-top:32px;
+        }
+        .gallery-prev,
+        .gallery-next {
+            background:none;
+            border:none;
+            color:var(--wood-dark);
+            cursor:pointer;
+            padding:8px;
+            border-radius:50%;
+            transition:all .3s;
+        }
+        .gallery-prev:hover,
+        .gallery-next:hover {
+            background:rgba(119,73,54,0.1);
+        }
+        .gallery-dots {
+            display:flex;
+            gap:8px;
+        }
+        .dot {
+            width:8px;
+            height:8px;
+            border-radius:50%;
+            background:var(--wood-dark);
+            opacity:0.2;
+            transition:all .3s;
+        }
+        .dot.active {
+            opacity:1;
+            transform:scale(1.2);
+        }
+
+        /* FAQ Section */
+        .faq-grid {
+            display:grid;
+            gap:16px;
+            margin-top:32px;
+        }
+        .faq-item {
+            border-radius:12px;
+            overflow:hidden;
+            background:var(--bg-warm);
+        }
+        .faq-question {
+            width:100%;
+            text-align:left;
+            padding:20px;
+            background:none;
+            border:none;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            cursor:pointer;
+            font-size:1.1rem;
+            color:var(--dark);
+            font-weight:600;
+            transition:all .3s;
+        }
+        .faq-icon {
+            flex-shrink:0;
+            transition:transform .3s;
+        }
+        .faq-question:hover {
+            background:rgba(119,73,54,0.05);
+        }
+        .faq-answer {
+            padding:0 20px;
+            max-height:0;
+            overflow:hidden;
+            transition:all .3s;
+        }
+        .faq-answer p {
+            margin:0;
+            padding-bottom:20px;
+            color:var(--muted);
+        }
+        .faq-item.active .faq-question {
+            background:rgba(119,73,54,0.08);
+        }
+        .faq-item.active .faq-icon {
+            transform:rotate(45deg);
+        }
+        .faq-item.active .faq-answer {
+            max-height:200px;
+        }
         h2{
             margin:0 0 16px;
             font-size:2.4rem;
@@ -349,6 +542,31 @@
             background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="%23774936" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
         }
 
+        .service-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px 24px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-warm);
+            color: var(--wood-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--anim);
+        }
+
+        .service-cta:hover {
+            background: var(--wood-dark);
+            color: var(--bg-warm);
+            transform: translateY(-2px);
+        }
+
+        .service-item:hover .service-cta {
+            background: var(--wood-dark);
+            color: var(--bg-warm);
+        }
+
         /* Formulario de contacto */
         .contact-form{
             margin-top:32px;
@@ -387,12 +605,18 @@
             background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
             color:#fff;
             border:0;
-            padding:14px;
+            padding:14px 28px;
             border-radius:10px;
             font-weight:700;
             font-size:16px;
             cursor:pointer;
             transition:all var(--anim);
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:8px;
+            width:auto;
+            min-width:200px;
         }
         .btn-submit:hover{
             transform:translateY(-2px);
@@ -425,7 +649,7 @@
             <div class="container nav-wrap">
                 <div class="container nav" id="topNav">
                     <div class="brand">
-                        <div class="logo">CS</div>
+                        <div class="logo"><span>CS</span></div>
                         <div>
                             <div class="title">Carpintería SierraLuna</div>
                             <div class="sub">Granada, España</div>
@@ -484,8 +708,18 @@
                     </span>
                 </div>
             <div class="hero-actions">
-                <a class="cta" href="#contacto">Solicita presupuesto</a>
-                <a style="background:transparent;border:1px solid rgba(255,255,255,0.35);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700" href="#proyectos">Ver proyectos</a>
+                <a class="btn-cta" href="#contacto">
+                    <span>Solicita presupuesto</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a class="btn-ghost" href="#proyectos">
+                    Ver proyectos anteriores
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
             </div>
             <div style="margin-top:18px;font-size:14px;opacity:0.95">📍 Plaza Nueva, Granada · Tel: <a href="tel:+34958000000" style="color:#fff;text-decoration:underline">+34 958 00 00 00</a></div>
         </div>
@@ -501,7 +735,7 @@
                     <div class="services">
                         <div class="service-item">
                             <div class="service-icon">
-                                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=400&auto=format&fit=crop" alt="Muebles a medida" class="service-img">
+                                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=800&auto=format&fit=crop" alt="Muebles a medida" class="service-img" loading="lazy">
                             </div>
                             <h3>Muebles a medida</h3>
                             <p>Diseñamos y fabricamos mobiliario único que se adapta perfectamente a tu espacio y estilo de vida.</p>
@@ -511,11 +745,17 @@
                                 <li>Muebles de salón</li>
                                 <li>Bibliotecas</li>
                             </ul>
+                            <a href="#contacto" class="service-cta">
+                                Solicitar información
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
                         </div>
                         
                         <div class="service-item">
                             <div class="service-icon">
-                                <img src="https://images.unsplash.com/photo-1611046538603-8c92f5f20571?q=80&w=400&auto=format&fit=crop" alt="Restauración" class="service-img">
+                                <img src="https://images.unsplash.com/photo-1611046538603-8c92f5f20571?q=80&w=800&auto=format&fit=crop" alt="Restauración" class="service-img" loading="lazy">
                             </div>
                             <h3>Restauración</h3>
                             <p>Devolvemos la vida a piezas antiguas respetando su historia y esencia original.</p>
@@ -525,11 +765,17 @@
                                 <li>Ventanas de madera</li>
                                 <li>Elementos decorativos</li>
                             </ul>
+                            <a href="#contacto" class="service-cta">
+                                Solicitar información
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
                         </div>
                         
                         <div class="service-item">
                             <div class="service-icon">
-                                <img src="https://images.unsplash.com/photo-1643539282070-d119bed8c614?q=80&w=400&auto=format&fit=crop" alt="Instalaciones" class="service-img">
+                                <img src="https://images.unsplash.com/photo-1643539282070-d119bed8c614?q=80&w=800&auto=format&fit=crop" alt="Instalaciones" class="service-img" loading="lazy">
                             </div>
                             <h3>Instalaciones</h3>
                             <p>Transformamos espacios con acabados en madera de la más alta calidad.</p>
@@ -539,6 +785,12 @@
                                 <li>Pérgolas y exterior</li>
                                 <li>Techos de madera</li>
                             </ul>
+                            <a href="#contacto" class="service-cta">
+                                Solicitar información
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -580,7 +832,144 @@
                         </div>
                         
                         <button type="submit" class="btn-submit">Enviar solicitud</button>
-                    </form>
+                    </div>
+                </section>
+
+                <section id="trabajos-anteriores" class="card">
+                    <h2>Trabajos anteriores</h2>
+                    <p class="subtitle">Explora algunos de nuestros proyectos más emblemáticos a lo largo de los años.</p>
+                    
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item">
+                            <img 
+                                src="https://images.unsplash.com/photo-1615529610458-1801f844d390?q=80&w=800&auto=format&fit=crop" 
+                                alt="Restaurante Alcázar" 
+                                class="portfolio-img"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=800'"
+                            >
+                            <div class="portfolio-info">
+                                <div class="portfolio-year">2024</div>
+                                <h3>Restaurante Alcázar</h3>
+                                <p>Mobiliario completo y revestimientos en madera de roble para restaurante en el centro histórico.</p>
+                                <div class="portfolio-tags">
+                                    <span>Mobiliario</span>
+                                    <span>Contract</span>
+                                </div>
+                                <a href="#contacto" class="portfolio-cta">
+                                    Ver más detalles
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <img 
+                                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=800&auto=format&fit=crop" 
+                                alt="Villa Sierra Nevada" 
+                                class="portfolio-img"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=800'"
+                            >
+                            <div class="portfolio-info">
+                                <div class="portfolio-year">2023</div>
+                                <h3>Villa Sierra Nevada</h3>
+                                <p>Proyecto integral de carpintería para villa de lujo incluyendo cocina, vestidores y mobiliario.</p>
+                                <div class="portfolio-tags">
+                                    <span>Residencial</span>
+                                    <span>Luxury</span>
+                                </div>
+                                <a href="#contacto" class="portfolio-cta">
+                                    Ver más detalles
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="portfolio-item">
+                            <img 
+                                src="https://images.unsplash.com/photo-1631679706909-1844bbd07221?q=80&w=800&auto=format&fit=crop" 
+                                alt="Biblioteca Universitaria" 
+                                class="portfolio-img"
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=800'"
+                            >
+                            <div class="portfolio-info">
+                                <div class="portfolio-year">2023</div>
+                                <h3>Biblioteca Universitaria</h3>
+                                <p>Restauración de mobiliario histórico y fabricación de nuevas piezas manteniendo el estilo original.</p>
+                                <div class="portfolio-tags">
+                                    <span>Restauración</span>
+                                    <span>Histórico</span>
+                                </div>
+                                <a href="#contacto" class="portfolio-cta">
+                                    Ver más detalles
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                        <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="faq" class="card">
+                    <h2>Preguntas frecuentes</h2>
+                    <p class="subtitle">Todo lo que necesitas saber sobre nuestros servicios y forma de trabajo.</p>
+                    
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>¿Cómo iniciamos un proyecto?</span>
+                                <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>El proceso comienza con una consulta inicial gratuita donde escuchamos tus necesidades y visión. Después realizamos mediciones y presentamos un diseño preliminar junto con el presupuesto. Una vez aprobado, definimos plazos y comenzamos la producción.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>¿Trabajáis solo en Granada capital?</span>
+                                <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Trabajamos en toda la provincia de Granada y zonas limítrofes. Para proyectos especiales, podemos desplazarnos a cualquier punto de Andalucía. Los costes de desplazamiento se incluyen en el presupuesto inicial.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>¿Ofrecéis servicio post-venta?</span>
+                                <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sí, todos nuestros trabajos incluyen garantía y servicio post-venta. Realizamos una revisión gratuita a los 6 meses y estamos disponibles para cualquier ajuste o mantenimiento necesario durante el período de garantía.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>¿Qué formas de pago aceptáis?</span>
+                                <svg class="faq-icon" viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Aceptamos transferencias bancarias, tarjetas de crédito y financiación a medida. Para proyectos grandes, trabajamos con un calendario de pagos: 30% al inicio, 40% durante la fabricación y 30% al finalizar la instalación.</p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
@@ -635,7 +1024,7 @@
             return false;
         }
 
-        // Mobile menu toggle
+            // Mobile menu toggle
             (function(){
                 var toggle = document.getElementById('menuToggle');
                 var topNav = document.getElementById('topNav');
@@ -651,18 +1040,66 @@
                 });
             })();
 
-            // Simple FAQ accordion
-            document.querySelectorAll('.faq .q').forEach(function(q){
-                q.addEventListener('click', function(){
-                    var next = q.nextElementSibling;
-                    if(!next) return;
-                    var open = next.style.display === 'block';
-                    // close all answers
-                    document.querySelectorAll('.faq .a').forEach(function(a){a.style.display='none'});
-                    // open selected
-                    next.style.display = open ? 'none' : 'block';
-                })
-            })
-        </script>
+            // FAQ Accordion with smooth animations
+            document.querySelectorAll('.faq-question').forEach(function(question) {
+                question.addEventListener('click', function() {
+                    const item = this.parentNode;
+                    const answer = item.querySelector('.faq-answer');
+                    const isOpen = item.classList.contains('active');
+                    
+                    // Close all FAQ items first
+                    document.querySelectorAll('.faq-item').forEach(function(faqItem) {
+                        if (faqItem !== item) {
+                            faqItem.classList.remove('active');
+                            const faqAnswer = faqItem.querySelector('.faq-answer');
+                            faqAnswer.style.maxHeight = '0';
+                        }
+                    });
+                    
+                    // Toggle selected item
+                    if (!isOpen) {
+                        item.classList.add('active');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        item.classList.remove('active');
+                        answer.style.maxHeight = '0';
+                    }
+                });
+            });
+
+            // Gallery Navigation
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.project-item');
+            const dots = document.querySelectorAll('.dot');
+            const totalSlides = slides.length;
+
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    if (index === currentSlide) {
+                        slide.style.display = 'block';
+                        dots[index].classList.add('active');
+                    } else {
+                        slide.style.display = 'none';
+                        dots[index].classList.remove('active');
+                    }
+                });
+            }
+
+            document.querySelector('.gallery-prev').addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlides();
+            });
+
+            document.querySelector('.gallery-next').addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlides();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlides();
+                });
+            });        </script>
 </body>
 </html>
