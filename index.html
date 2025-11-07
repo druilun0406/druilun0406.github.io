@@ -6,12 +6,26 @@
     <title>Carpintería SierraLuna — Granada</title>
     <meta name="description" content="Carpintería SierraLuna en Granada: muebles a medida, restauración y reformas de madera. Calidad artesanal y diseño local." />
     <style>
+        @keyframes fadeInUp {
+            from {opacity:0;transform:translateY(20px)}
+            to {opacity:1;transform:translateY(0)}
+        }
+        @keyframes fadeIn {
+            from {opacity:0}
+            to {opacity:1}
+        }
+        @keyframes slideInRight {
+            from {opacity:0;transform:translateX(30px)}
+            to {opacity:1;transform:translateX(0)}
+        }
+        
         :root{
             --accent-1: #ff7a18;
-            --accent-2: #8b5a2b; /* madera */
+            --accent-2: #8b5a2b;
             --dark: #112;
             --muted: #6b6b6b;
             --glass: rgba(255,255,255,0.6);
+            --anim: .4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         *{box-sizing:border-box}
         body{font-family:Inter, system-ui, Arial, sans-serif;line-height:1.5;color:var(--dark);margin:0;background:#fbf9f6}
@@ -19,39 +33,183 @@
         /* Header (glass + modern) */
         header{
             position:sticky;top:12px;z-index:20;padding:6px 0;
+            animation:fadeIn .5s ease-out;
         }
-        .nav-wrap{backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.4));box-shadow:0 8px 30px rgba(15,15,15,0.06);border-radius:14px}
+        .nav-wrap{
+            backdrop-filter:blur(6px);
+            background:linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.4));
+            box-shadow:0 8px 30px rgba(15,15,15,0.06);
+            border-radius:14px;
+            transform-origin:top;
+            animation:fadeInUp .4s ease-out;
+        }
         .container{max-width:1100px;margin:0 auto;padding:0 20px}
         .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 8px}
         .brand{display:flex;align-items:center;gap:14px}
-        .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,#c69b6d,#8b5a2b);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;box-shadow:0 6px 18px rgba(139,90,43,0.18)}
+        .logo{
+            width:56px;height:56px;
+            border-radius:12px;
+            background:linear-gradient(135deg,#c69b6d,#8b5a2b);
+            display:flex;align-items:center;justify-content:center;
+            color:#fff;font-weight:800;font-size:18px;
+            box-shadow:0 6px 18px rgba(139,90,43,0.18);
+            transition:transform var(--anim), box-shadow var(--anim);
+        }
+        .logo:hover{
+            transform:scale(1.05) rotate(-3deg);
+            box-shadow:0 8px 24px rgba(139,90,43,0.25);
+        }
         .brand .title{font-weight:800;letter-spacing:0.2px}
         .brand .sub{font-size:12px;color:var(--muted)}
 
         nav{margin-left:24px}
         nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;align-items:center}
-        nav a{color:var(--dark);text-decoration:none;font-weight:600;position:relative;padding:6px 0}
-        nav a::after{content:'';position:absolute;left:0;bottom:-6px;width:0;height:3px;border-radius:2px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));transition:width .28s}
-        nav a:hover::after, nav a.active::after{width:100%}
+        nav a{
+            color:var(--dark);text-decoration:none;
+            font-weight:600;position:relative;padding:6px 0;
+            transition:color var(--anim);
+        }
+        nav a::after{
+            content:'';position:absolute;
+            left:0;bottom:-6px;width:0;height:3px;
+            border-radius:2px;
+            background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+            transition:width var(--anim), transform var(--anim);
+            transform:scaleY(1);
+        }
+        nav a:hover{color:var(--accent-1)}
+        nav a:hover::after{
+            width:100%;
+            transform:scaleY(1.2);
+        }
+        nav a.active::after{width:100%}
 
         .actions{display:flex;gap:12px;align-items:center}
-        .btn-cta{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;color:#fff;font-weight:800;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));box-shadow:0 8px 20px rgba(139,90,43,0.18);text-decoration:none;transform:translateY(0);transition:transform .16s, box-shadow .16s}
-        .btn-cta:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(139,90,43,0.2)}
+        .btn-cta{
+            display:inline-flex;align-items:center;gap:10px;
+            padding:12px 20px;border-radius:12px;
+            color:#fff;font-weight:800;
+            background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+            box-shadow:0 8px 20px rgba(139,90,43,0.18);
+            text-decoration:none;
+            transform:translateY(0) scale(1);
+            transition:all var(--anim);
+        }
+        .btn-cta:hover{
+            transform:translateY(-3px) scale(1.02);
+            box-shadow:0 14px 34px rgba(139,90,43,0.2);
+        }
+        .btn-cta:active{
+            transform:translateY(0) scale(0.98);
+        }
 
         /* subtle secondary button */
-        .btn-ghost{background:transparent;border:1px solid rgba(17,17,17,0.06);padding:8px 12px;border-radius:10px;color:var(--dark);font-weight:700;text-decoration:none}
+        .btn-ghost{
+            background:transparent;
+            border:1px solid rgba(17,17,17,0.06);
+            padding:10px 16px;border-radius:10px;
+            color:var(--dark);font-weight:700;
+            text-decoration:none;
+            transition:all var(--anim);
+        }
+        .btn-ghost:hover{
+            border-color:rgba(17,17,17,0.2);
+            background:rgba(255,255,255,0.8);
+            transform:translateY(-2px);
+        }
 
         /* Hero tweaks */
-        .hero{display:flex;align-items:center;color:#fff;min-height:58vh;background-size:cover;background-position:center;border-radius:16px;margin:18px 0}
-        .hero-inner{background:linear-gradient(90deg, rgba(0,0,0,0.60), rgba(0,0,0,0.28));width:100%;padding:64px 20px;border-radius:16px}
-        .hero h1{margin:0 0 8px;font-size:2.4rem}
-        .hero p{margin:0 0 18px;color:#f8efe7;font-size:1.05rem}
+        .hero{
+            display:flex;align-items:center;
+            color:#fff;min-height:58vh;
+            background-size:cover;
+            background-position:center;
+            border-radius:16px;margin:18px 0;
+            animation:fadeInUp .6s ease-out .2s both;
+        }
+        .hero-inner{
+            background:linear-gradient(90deg, rgba(0,0,0,0.60), rgba(0,0,0,0.28));
+            width:100%;padding:64px 20px;
+            border-radius:16px;
+        }
+        .hero h1{
+            margin:0 0 8px;font-size:2.4rem;
+            animation:fadeInUp .5s ease-out .4s both;
+        }
+        .hero p{
+            margin:0 0 18px;color:#f8efe7;
+            font-size:1.05rem;line-height:1.6;
+            animation:fadeInUp .5s ease-out .6s both;
+        }
+        .hero-actions{
+            animation:fadeInUp .5s ease-out .8s both;
+        }
 
         /* Content */
         main{padding:20px 0 60px}
         .grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
-        .card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 10px 30px rgba(18,18,18,0.04)}
+        .card{
+            background:#fff;border-radius:12px;
+            padding:28px;
+            box-shadow:0 10px 30px rgba(18,18,18,0.04);
+            animation:fadeInUp .5s ease-out 1s both;
+            transition:transform var(--anim), box-shadow var(--anim);
+        }
+        .card:hover{
+            transform:translateY(-4px);
+            box-shadow:0 20px 40px rgba(18,18,18,0.08);
+        }
         h2{margin-top:0}
+
+        /* Formulario de contacto */
+        .contact-form{
+            margin-top:32px;
+            display:grid;
+            gap:16px;
+        }
+        .form-group{
+            display:grid;
+            gap:8px;
+        }
+        .form-group label{
+            font-weight:600;
+            font-size:14px;
+            color:var(--dark);
+        }
+        .form-group input,
+        .form-group textarea{
+            padding:12px;
+            border:2px solid #eee;
+            border-radius:8px;
+            font-size:15px;
+            transition:all var(--anim);
+            font-family:inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus{
+            outline:none;
+            border-color:var(--accent-2);
+            box-shadow:0 4px 12px rgba(139,90,43,0.1);
+        }
+        .form-group textarea{
+            min-height:120px;
+            resize:vertical;
+        }
+        .btn-submit{
+            background:linear-gradient(90deg,var(--accent-1),var(--accent-2));
+            color:#fff;
+            border:0;
+            padding:14px;
+            border-radius:10px;
+            font-weight:700;
+            font-size:16px;
+            cursor:pointer;
+            transition:all var(--anim);
+        }
+        .btn-submit:hover{
+            transform:translateY(-2px);
+            box-shadow:0 8px 20px rgba(139,90,43,0.2);
+        }
 
         /* FAQ */
         .faq .q{border-top:1px solid #f0f0f0;padding:14px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
@@ -135,12 +293,100 @@
                         <li><strong>Diseño y consultoría:</strong> planos, visualizaciones y asesoría de materiales.</li>
                     </ul>
                 </section>
+
+                <section id="contacto" class="card">
+                    <h2>Solicitar presupuesto</h2>
+                    <p>Cuéntanos sobre tu proyecto y te contactaremos en menos de 24 horas con una propuesta personalizada.</p>
+                    
+                    <form class="contact-form" id="presupuestoForm" onsubmit="return handleSubmit(event)">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email de contacto</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefono">Teléfono (opcional)</label>
+                            <input type="tel" id="telefono" name="telefono">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tipo">Tipo de proyecto</label>
+                            <select id="tipo" name="tipo" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="muebles">Muebles a medida</option>
+                                <option value="restauracion">Restauración</option>
+                                <option value="instalacion">Instalación/Reforma</option>
+                                <option value="otro">Otro (especificar)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensaje">Cuéntanos sobre tu proyecto</label>
+                            <textarea id="mensaje" name="mensaje" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit">Enviar solicitud</button>
+                    </form>
+                </section>
             </div>
         </div>
     </main>
 
-        <script>
-            // Mobile menu toggle
+    <script>
+        // Animaciones al scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            observer.observe(card);
+        });
+
+        // Gestión del formulario
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const submitBtn = form.querySelector('.btn-submit');
+            const formData = new FormData(form);
+            
+            // Cambiamos el botón a estado de envío
+            submitBtn.innerHTML = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            // Simulamos envío (aquí irían los datos a tu backend)
+            setTimeout(() => {
+                // Éxito
+                submitBtn.innerHTML = '¡Enviado! Te contactaremos pronto';
+                submitBtn.style.background = '#2ecc71';
+                
+                // Reseteamos el form después de un momento
+                setTimeout(() => {
+                    form.reset();
+                    submitBtn.innerHTML = 'Enviar solicitud';
+                    submitBtn.disabled = false;
+                    submitBtn.style.background = '';
+                }, 3000);
+            }, 1500);
+
+            return false;
+        }
+
+        // Mobile menu toggle
             (function(){
                 var toggle = document.getElementById('menuToggle');
                 var topNav = document.getElementById('topNav');
