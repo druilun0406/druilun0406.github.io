@@ -20,15 +20,32 @@
         }
         
         :root{
-            --accent-1: #ff7a18;
-            --accent-2: #8b5a2b;
-            --dark: #112;
-            --muted: #6b6b6b;
-            --glass: rgba(255,255,255,0.6);
+            --accent-1: #e67e22;
+            --accent-2: #85502d;
+            --wood-light: #d4a373;
+            --wood-dark: #774936;
+            --bg-warm: #fdf6ed;
+            --dark: #2d231f;
+            --muted: #6b665f;
+            --glass: rgba(255,255,255,0.8);
             --anim: .4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         *{box-sizing:border-box}
-        body{font-family:Inter, system-ui, Arial, sans-serif;line-height:1.5;color:var(--dark);margin:0;background:#fbf9f6}
+        body{
+            font-family:'DM Sans', system-ui, sans-serif;
+            line-height:1.5;
+            color:var(--dark);
+            margin:0;
+            background:var(--bg-warm);
+            background-image: 
+                radial-gradient(circle at 100% 0%, rgba(212,163,115,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(133,80,45,0.05) 0%, transparent 50%);
+        }
+        
+        @font-face {
+            font-family: 'DM Sans';
+            src: url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+        }
 
         /* Header (glass + modern) */
         header{
@@ -47,17 +64,46 @@
         .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 8px}
         .brand{display:flex;align-items:center;gap:14px}
         .logo{
-            width:56px;height:56px;
-            border-radius:12px;
-            background:linear-gradient(135deg,#c69b6d,#8b5a2b);
+            width:64px;height:64px;
+            border-radius:16px;
+            background:linear-gradient(135deg, var(--wood-light), var(--wood-dark));
             display:flex;align-items:center;justify-content:center;
-            color:#fff;font-weight:800;font-size:18px;
-            box-shadow:0 6px 18px rgba(139,90,43,0.18);
-            transition:transform var(--anim), box-shadow var(--anim);
+            position:relative;
+            color:#fff;
+            font-weight:800;
+            font-size:20px;
+            box-shadow:
+                0 6px 18px rgba(139,90,43,0.18),
+                inset 0 2px 4px rgba(255,255,255,0.2);
+            transition:all var(--anim);
+            overflow:hidden;
+        }
+        .logo::before {
+            content:'';
+            position:absolute;
+            width:100%;
+            height:100%;
+            background-image: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="none"/><path d="M0 0L80 80M20 0L80 60M40 0L80 40M60 0L80 20M0 20L60 80M0 40L40 80M0 60L20 80" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></svg>');
+            opacity:0.15;
+        }
+        .logo::after {
+            content:'';
+            position:absolute;
+            width:40px;height:40px;
+            background-image: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 5L35 30H5L20 5Z" fill="rgba(255,255,255,0.2)"/></svg>');
+            opacity:0;
+            transform:translateY(40px);
+            transition:all 0.5s;
         }
         .logo:hover{
             transform:scale(1.05) rotate(-3deg);
-            box-shadow:0 8px 24px rgba(139,90,43,0.25);
+            box-shadow:
+                0 8px 24px rgba(139,90,43,0.25),
+                inset 0 2px 6px rgba(255,255,255,0.3);
+        }
+        .logo:hover::after {
+            opacity:1;
+            transform:translateY(0) rotate(180deg);
         }
         .brand .title{font-weight:800;letter-spacing:0.2px}
         .brand .sub{font-size:12px;color:var(--muted)}
@@ -118,48 +164,190 @@
             transform:translateY(-2px);
         }
 
-        /* Hero tweaks */
+        /* Hero moderno */
         .hero{
-            display:flex;align-items:center;
-            color:#fff;min-height:58vh;
+            display:flex;
+            align-items:center;
+            color:#fff;
+            min-height:75vh;
             background-size:cover;
             background-position:center;
-            border-radius:16px;margin:18px 0;
+            border-radius:24px;
+            margin:18px 0;
+            position:relative;
+            overflow:hidden;
             animation:fadeInUp .6s ease-out .2s both;
         }
+        .hero::before {
+            content:'';
+            position:absolute;
+            top:0;left:0;
+            width:100%;height:100%;
+            background:linear-gradient(
+                45deg,
+                rgba(45,35,31,0.92),
+                rgba(45,35,31,0.75) 60%,
+                rgba(45,35,31,0.4)
+            );
+            z-index:1;
+        }
         .hero-inner{
-            background:linear-gradient(90deg, rgba(0,0,0,0.60), rgba(0,0,0,0.28));
-            width:100%;padding:64px 20px;
+            position:relative;
+            z-index:2;
+            width:100%;
+            padding:80px 20px;
             border-radius:16px;
         }
+        .hero-content {
+            max-width:800px;
+        }
         .hero h1{
-            margin:0 0 8px;font-size:2.4rem;
+            margin:0 0 16px;
+            font-size:3.2rem;
+            line-height:1.2;
+            font-weight:800;
+            background: linear-gradient(90deg, #fff, #f0e9e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation:fadeInUp .5s ease-out .4s both;
         }
         .hero p{
-            margin:0 0 18px;color:#f8efe7;
-            font-size:1.05rem;line-height:1.6;
+            margin:0 0 32px;
+            color:#f8efe7;
+            font-size:1.2rem;
+            line-height:1.6;
             animation:fadeInUp .5s ease-out .6s both;
         }
         .hero-actions{
             animation:fadeInUp .5s ease-out .8s both;
+            display:flex;
+            gap:16px;
+            flex-wrap:wrap;
+        }
+        .hero-features {
+            display:flex;
+            gap:24px;
+            margin-top:48px;
+            flex-wrap:wrap;
+            animation:fadeInUp .5s ease-out 1s both;
+        }
+        .feature {
+            display:flex;
+            align-items:center;
+            gap:8px;
+            font-size:0.95rem;
+            color:#f0e9e0;
+            padding:8px 16px;
+            background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(10px);
+            border-radius:100px;
+            border:1px solid rgba(255,255,255,0.2);
+        }
+        .feature svg {
+            flex-shrink:0;
         }
 
-        /* Content */
+        /* Content & Cards */
         main{padding:20px 0 60px}
-        .grid{display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start}
+        .grid{display:grid;grid-template-columns:1fr;gap:28px;align-items:start;max-width:1200px;margin:0 auto}
         .card{
-            background:#fff;border-radius:12px;
-            padding:28px;
+            background:#fff;
+            border-radius:24px;
+            padding:40px;
             box-shadow:0 10px 30px rgba(18,18,18,0.04);
             animation:fadeInUp .5s ease-out 1s both;
-            transition:transform var(--anim), box-shadow var(--anim);
+            transition:all var(--anim);
         }
         .card:hover{
             transform:translateY(-4px);
             box-shadow:0 20px 40px rgba(18,18,18,0.08);
         }
-        h2{margin-top:0}
+        h2{
+            margin:0 0 16px;
+            font-size:2.4rem;
+            background:linear-gradient(90deg, var(--wood-dark), var(--accent-2));
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        .subtitle {
+            font-size:1.2rem;
+            color:var(--muted);
+            max-width:800px;
+            margin:0 0 48px;
+        }
+
+        /* Servicios Grid */
+        .services {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+            gap:32px;
+            margin-top:32px;
+        }
+        .service-item {
+            display:flex;
+            flex-direction:column;
+            gap:16px;
+            padding:24px;
+            border-radius:16px;
+            background:var(--bg-warm);
+            transition:all var(--anim);
+        }
+        .service-item:hover {
+            transform:translateY(-8px);
+            box-shadow:0 20px 40px rgba(18,18,18,0.06);
+        }
+        .service-icon {
+            width:100%;
+            height:200px;
+            border-radius:12px;
+            overflow:hidden;
+            position:relative;
+        }
+        .service-img {
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            transition:transform .5s ease-out;
+        }
+        .service-item:hover .service-img {
+            transform:scale(1.05);
+        }
+        .service-item h3 {
+            font-size:1.4rem;
+            margin:0;
+            background:linear-gradient(90deg, var(--wood-dark), var(--accent-2));
+            -webkit-background-clip:text;
+            background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        .service-item p {
+            color:var(--muted);
+            margin:0;
+            line-height:1.6;
+        }
+        .service-features {
+            list-style:none;
+            padding:0;
+            margin:0;
+            display:grid;
+            gap:8px;
+        }
+        .service-features li {
+            padding-left:24px;
+            position:relative;
+            color:var(--dark);
+        }
+        .service-features li::before {
+            content:'';
+            position:absolute;
+            left:0;
+            top:50%;
+            transform:translateY(-50%);
+            width:16px;
+            height:16px;
+            background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="%23774936" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+        }
 
         /* Formulario de contacto */
         .contact-form{
@@ -268,10 +456,33 @@
             </div>
         </header>
 
-    <section id="inicio" class="hero" style="background-image:url('https://images.unsplash.com/photo-1520975912845-3d6c3a5b1f6b?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=0f8c3b6a6a4b4b2f2a1e3b5d0b9c9f1e');">
+    <section id="inicio" class="hero" style="background-image:url('https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
         <div class="container hero-inner">
-            <h1>Carpintería artesanal en Granada</h1>
-            <p>Diseñamos y fabricamos muebles a medida, restauramos piezas con historia y ejecutamos reformas de carpintería con materiales sostenibles.</p>
+            <div class="hero-content">
+                <h1>Carpintería artesanal en Granada</h1>
+                <p>Diseñamos y fabricamos muebles a medida, restauramos piezas con historia y ejecutamos reformas de carpintería con materiales sostenibles y técnicas tradicionales.</p>
+                <div class="hero-features">
+                    <span class="feature">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 12L10 17L4 12M20 17L10 22L4 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M20 7L10 12L4 7L10 2L20 7Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Diseño personalizado
+                    </span>
+                    <span class="feature">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 6V12L16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        30+ años de experiencia
+                    </span>
+                    <span class="feature">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Calidad garantizada
+                    </span>
+                </div>
             <div class="hero-actions">
                 <a class="cta" href="#contacto">Solicita presupuesto</a>
                 <a style="background:transparent;border:1px solid rgba(255,255,255,0.35);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700" href="#proyectos">Ver proyectos</a>
@@ -283,15 +494,53 @@
     <main class="container">
         <div class="grid">
             <div>
-                <section id="servicios" class="card">
-                    <h2>Qué hacemos</h2>
-                    <p>En Carpintería SierraLuna combinamos técnicas tradicionales con maquinaria moderna para ofrecer soluciones de carpintería a medida. Trabajamos con maderas locales y acabados ecológicos.</p>
-                    <ul>
-                        <li><strong>Muebles a medida:</strong> cocina, armarios, mesas y muebles de salón.</li>
-                        <li><strong>Restauración:</strong> recuperación de puertas, ventanas y piezas antiguas.</li>
-                        <li><strong>Instalaciones:</strong> tarimas, revestimientos y carpintería exterior.</li>
-                        <li><strong>Diseño y consultoría:</strong> planos, visualizaciones y asesoría de materiales.</li>
-                    </ul>
+                <section id="servicios" class="card services-grid">
+                    <h2>Nuestros servicios</h2>
+                    <p class="subtitle">En Carpintería SierraLuna combinamos técnicas tradicionales con maquinaria moderna para ofrecer soluciones únicas y sostenibles.</p>
+                    
+                    <div class="services">
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <img src="https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?q=80&w=400&auto=format&fit=crop" alt="Muebles a medida" class="service-img">
+                            </div>
+                            <h3>Muebles a medida</h3>
+                            <p>Diseñamos y fabricamos mobiliario único que se adapta perfectamente a tu espacio y estilo de vida.</p>
+                            <ul class="service-features">
+                                <li>Cocinas completas</li>
+                                <li>Armarios y vestidores</li>
+                                <li>Muebles de salón</li>
+                                <li>Bibliotecas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <img src="https://images.unsplash.com/photo-1611046538603-8c92f5f20571?q=80&w=400&auto=format&fit=crop" alt="Restauración" class="service-img">
+                            </div>
+                            <h3>Restauración</h3>
+                            <p>Devolvemos la vida a piezas antiguas respetando su historia y esencia original.</p>
+                            <ul class="service-features">
+                                <li>Muebles antiguos</li>
+                                <li>Puertas históricas</li>
+                                <li>Ventanas de madera</li>
+                                <li>Elementos decorativos</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <img src="https://images.unsplash.com/photo-1643539282070-d119bed8c614?q=80&w=400&auto=format&fit=crop" alt="Instalaciones" class="service-img">
+                            </div>
+                            <h3>Instalaciones</h3>
+                            <p>Transformamos espacios con acabados en madera de la más alta calidad.</p>
+                            <ul class="service-features">
+                                <li>Tarimas y suelos</li>
+                                <li>Revestimientos</li>
+                                <li>Pérgolas y exterior</li>
+                                <li>Techos de madera</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
 
                 <section id="contacto" class="card">
